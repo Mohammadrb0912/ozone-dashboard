@@ -13,7 +13,7 @@ const Products = () => {
   if (isLoading) return <p>Loading...</p>;
   if (!products) return <p>Product not found</p>;
 
-  // فیلتر
+
   let filtered = products.filter((product) =>
     product.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -22,11 +22,11 @@ const Products = () => {
     filtered = filtered.filter((p) => p.category === category);
   }
 
-  // مرتب‌سازی
+
   if (sort === "asc") filtered.sort((a, b) => a.price - b.price);
   if (sort === "desc") filtered.sort((a, b) => b.price - a.price);
 
-  // میانگین قیمت
+
   const averagePrice =
     filtered.reduce((sum, p) => sum + p.price, 0) / filtered.length || 0;
 
