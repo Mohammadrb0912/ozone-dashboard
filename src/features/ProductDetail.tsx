@@ -33,24 +33,24 @@ const ProductDetail = () => {
         <p className="text-xl text-green-700 font-semibold mb-2">${product.price}</p>
         <p className="text-yellow-500 mb-4 flex items-center gap-1 text-sm">
           <FaStar className="w-4 h-4" />
-           {product.rating.rate} ({product.rating.count} reviews)
+          {product.rating.rate} ({product.rating.count} reviews)
         </p>
 
         <button
           onClick={() =>
-          addToCart({
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          image: product.image,
-          quantity: 1,
-          })
+            addToCart({
+              id: product.id,
+              title: product.title,
+              price: product.price,
+              image: product.image,
+              quantity: 1,
+            })
           }
           className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 flex items-center gap-2"
         >
-  <FaShoppingCart className="w-4 h-4 text-white" />
-  Add to Cart
-</button>
+          <FaShoppingCart className="w-4 h-4 text-white" />
+          Add to Cart
+        </button>
       </div>
     </div>
   );

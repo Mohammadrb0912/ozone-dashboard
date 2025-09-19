@@ -1,6 +1,5 @@
 import { useProducts } from "../hooks/useProducts";
-import ProductCard from "../components/ProductCard";
-import FiltersBar from "../components/FiltersBar";
+import { FiltersBar, ProductCard } from "../components/index";
 
 import { FaShoppingCart } from "react-icons/fa";
 import { MdBarChart } from "react-icons/md";
