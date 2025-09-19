@@ -4,8 +4,12 @@ import { FiltersBar, ProductCard } from "../components/index";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdBarChart } from "react-icons/md";
 import { useFilterStore } from "../store/filterStore";
+import { useSyncFilters } from "../hooks/useSyncFilters";
 
 const Products = () => {
+
+ useSyncFilters();
+
   const { data: products, isLoading } = useProducts();
   const { search, sort, category } = useFilterStore();
 
