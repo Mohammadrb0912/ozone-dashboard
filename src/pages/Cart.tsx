@@ -2,6 +2,7 @@ import { useCartStore } from "../store/cartStore";
 import { FiTrash2 } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { HiOutlineDocumentReport } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { items, totalQuantity, removeFromCart } = useCartStore();
@@ -19,14 +20,32 @@ const Cart = () => {
       </h1>
 
       {items.length === 0 ? (
-        <p className="text-gray-600">Your cart is empty.</p>
+      
+        <div className="flex flex-col items-center justify-center py-20">
+          <FaShoppingCart className="w-16 h-16 text-gray-400 mb-4" />
+          <h2 className="text-2xl font-bold text-gray-700 mb-2">
+            Your cart is empty
+          </h2>
+          <p className="text-gray-500 mb-6 text-center max-w-sm">
+            Looks like you haven’t added anything to your cart yet. 
+            Explore our products and find something you love!
+          </p>
+          <Link
+            to="/products"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
+          >
+            Back to Products
+          </Link>
+        </div>
       ) : (
+      
         <div className="grid md:grid-cols-3 gap-8">
+      
           <div className="md:col-span-2 space-y-4">
             {items.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between border rounded-lg p-4 shadow-sm"
+                className="flex items-center justify-between border rounded-lg p-4 shadow-sm hover:shadow-md transition"
               >
                 <div className="flex items-center gap-4">
                   <img
@@ -44,7 +63,8 @@ const Cart = () => {
 
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="text-red-500 hover:text-red-700"
+                  className="text-red-500 hover:text-red-700 transition"
+                  title="Remove item"
                 >
                   <FiTrash2 className="w-5 h-5" />
                 </button>
@@ -52,6 +72,7 @@ const Cart = () => {
             ))}
           </div>
 
+       
           <div className="bg-gray-100 p-6 rounded-lg shadow-md h-fit">
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <HiOutlineDocumentReport className="w-5 h-5 text-gray-700" />

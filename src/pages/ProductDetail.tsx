@@ -1,31 +1,27 @@
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
 import { useCartStore } from "../store/cartStore";
-import type { Product } from "../types/product";
-import { FaStar } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
-
-const fetchProduct = async (id: string): Promise<Product> => {
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-  if (!res.ok) throw new Error("Failed to fetch product");
-  return res.json();
-};
+import { FaStar, FaShoppingCart } from "react-icons/fa";
+import { useProductDetail } from "../hooks/useProductDetail";
+import Loading from "./Loading";
+import NotFound from "./NotFound";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { data: product, isLoading } = useQuery<Product>({
-    queryKey: ["product", id],
-    queryFn: () => fetchProduct(id!),
-  });
+  const { data: product, isLoading, isError, error } = useProductDetail(id!);
 
   const addToCart = useCartStore((state) => state.addToCart);
 
-  if (isLoading) return <p className="p-4">Loading...</p>;
-  if (!product) return <p className="p-4">Product not found</p>;
+  if (isLoading) return <Loading />;
+  if (isError) return <p className="p-4 text-red-600">{(error as Error).message}</p>;
+  if (!product) return <NotFound />;
 
   return (
     <div className="max-w-5xl mx-auto p-6 grid md:grid-cols-2 gap-8">
-      <img src={product.image} alt={product.title} className="h-80 object-contain" />
+      <img
+        src={product.image}
+        alt={product.title}
+        className="h-80 object-contain"
+      />
 
       <div>
         <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
