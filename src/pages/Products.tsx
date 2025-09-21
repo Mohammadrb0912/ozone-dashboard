@@ -5,18 +5,19 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdBarChart } from "react-icons/md";
 import { useFilterStore } from "../store/filterStore";
 import { useSyncFilters } from "../hooks/useSyncFilters";
-import Loading from "./Loading";
+
 import NotFound from "./NotFound";
+import ProductCardSkeleton from "../Skeleton/ProductCardSkeleton";
 
 
 const Products = () => {
 
- useSyncFilters();
+  useSyncFilters();
 
   const { data: products, isLoading } = useProducts();
   const { search, sort, category } = useFilterStore();
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <ProductCardSkeleton />;
   if (!products) return <NotFound />;
 
 

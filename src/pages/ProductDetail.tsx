@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { useCartStore } from "../store/cartStore";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 import { useProductDetail } from "../hooks/useProductDetail";
-import Loading from "./Loading";
+
 import NotFound from "./NotFound";
+import ProductDetailSkeleton from "../Skeleton/ProductDetailSkeleton";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const ProductDetail = () => {
 
   const addToCart = useCartStore((state) => state.addToCart);
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <ProductDetailSkeleton />;
   if (isError) return <p className="p-4 text-red-600">{(error as Error).message}</p>;
   if (!product) return <NotFound />;
 
